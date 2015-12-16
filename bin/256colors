@@ -1,5 +1,7 @@
 #!/usr/bin/env perl
 
+# PODNAME: 256colors - Pretty print integer and hex (rgb) color codes
+
 use strict;
 use warnings;
 use v5.10;
@@ -26,3 +28,27 @@ for my $intcolor (0..255) {
         $outcount = 0;
     }
 }
+
+__END__
+
+=head1 SYNOPSIS
+
+    $ 256colors
+
+=head1 SCREENSHOT
+
+=begin HTML
+
+<p><img src="http://i.imgur.com/lTMSTgi.png" /></p>
+
+=end HTML
+
+L<http://imgur.com/lTMSTgi>
+
+=head1 SEE ALSO
+
+=over 4
+
+=item L<Color::ANSI::Util>
+
+=back
