@@ -1,0 +1,28 @@
+#!/usr/bin/env perl
+
+use strict;
+use warnings;
+use v5.10;
+
+use IPC::System::Simple qw(capture);
+use Color::ANSI::Util qw(ansi256_to_rgb);
+
+my $maxcount = capture q(tput cols);
+my $margin   = 15;
+
+open my $less_pipe, "|-", "less -R" or die $!;
+
+my $outcount;
+for my $intcolor (0..255) {
+    printf $less_pipe "\e[1;38;5;${intcolor}m%03d\e[0m ", $intcolor;
+    $outcount += 5;
+
+    my $hexcolor = ansi256_to_rgb($intcolor);
+    printf $less_pipe "(\e[1;38;5;${intcolor}m%s\e[0m)  ", "#$hexcolor";
+    $outcount += 10;
+
+    if ( $outcount >= $maxcount-$margin ) {
+        print $less_pipe "\n";
+        $outcount = 0;
+    }
+}
