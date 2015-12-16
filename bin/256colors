@@ -10,7 +10,7 @@ use Color::ANSI::Util qw(ansi256_to_rgb);
 my $maxcount = capture q(tput cols);
 my $margin   = 15;
 
-open my $less_pipe, "|-", "less -R" or die $!;
+open my $less_pipe, "|-", "less -FRX" or die $!;
 
 my $outcount;
 for my $intcolor (0..255) {
